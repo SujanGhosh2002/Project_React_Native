@@ -1,24 +1,19 @@
-import {CameraRoll} from '@react-native-camera-roll/camera-roll';
-import React, {useEffect, useState} from 'react';
 import {
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
   FlatList,
   Image,
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
 } from 'react-native';
-import ImageView from 'react-native-image-viewing';
-import {hasAndroidPermission} from '../components/Parmition';
-import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useAppDispatch, useAppSelector} from '../Redux/hooks';
-import {
-  addFavorite,
-  removeFavorite,
-} from '../Redux/features/favorite/favoriteSlice';
+import React, {useEffect, useState} from 'react';
 import Header from '../components/Header';
+import {useAppDispatch, useAppSelector} from '../Redux/hooks';
+import {hasAndroidPermission} from '../components/Parmition';
+import {CameraRoll} from '@react-native-camera-roll/camera-roll';
+import ImageView from 'react-native-image-viewing';
 
-const Gallery = () => {
+const Favorite = () => {
   const [isVisible, setIsVisible] = useState(false);
   const [images, setImages] = useState([] as any);
   const [selectedImageIndex, setSelectedImageIndex] = useState(0);
@@ -49,16 +44,9 @@ const Gallery = () => {
     loadImages();
   }, []);
 
-  const handleFavoriteToggle = (id: string, isFavorite: boolean) => {
-    if (isFavorite) {
-      dispatch(removeFavorite(id));
-    } else {
-      dispatch(addFavorite(id));
-    }
-  };
   const renderItem = ({item, index}: any) => {
     const isFavorite = favorite.some(image => image === item.id);
-    return (
+    return isFavorite ? (
       <TouchableOpacity
         style={styles.imageContainer}
         onPress={() => {
@@ -66,18 +54,8 @@ const Gallery = () => {
           setIsVisible(true);
         }}>
         <Image source={{uri: item.image.uri}} style={styles.image} />
-        <TouchableOpacity
-          style={styles.favorite}
-          onPress={() => handleFavoriteToggle(item.id, isFavorite)}>
-          <Icon
-            style={styles.love}
-            name="favorite"
-            size={30}
-            color={isFavorite ? 'red' : 'gray'}
-          />
-        </TouchableOpacity>
       </TouchableOpacity>
-    );
+    ) : null;
   };
 
   return (
@@ -101,6 +79,8 @@ const Gallery = () => {
   );
 };
 
+export default Favorite;
+
 const styles = StyleSheet.create({
   imageContainer: {
     flex: 1,
@@ -119,5 +99,3 @@ const styles = StyleSheet.create({
     padding: 5,
   },
 });
-
-export default Gallery;

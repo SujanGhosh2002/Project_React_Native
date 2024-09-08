@@ -7,18 +7,11 @@ import {
   Image,
 } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import {useNavigation} from '@react-navigation/native';
-import {useAppDispatch} from '../Redux/hooks';
-import {showSidebar} from '../Redux/features/sidebar/sidebarSlice';
 
 const Header = () => {
-  const dispatch = useAppDispatch();
-  const navigation = useNavigation();
   return (
     <View style={styles.container}>
-      <TouchableOpacity
-        style={styles.icon}
-        onPress={() => dispatch(showSidebar())}>
+      <TouchableOpacity style={styles.icon}>
         <Icon name="account-circle" size={28} color="#0073b1" />
       </TouchableOpacity>
 
@@ -33,10 +26,10 @@ const Header = () => {
 
       <View style={styles.iconContainer}>
         <TouchableOpacity style={styles.icon}>
-          <Icon name="my-library-add" size={28} color="#0073b1" />
+          <Icon name="add" size={28} color="#0073b1" />
         </TouchableOpacity>
         <TouchableOpacity style={styles.icon}>
-          <Icon name="chat" size={28} color="#0073b1" />
+          <Icon name="more-vert" size={28} color="#0073b1" />
         </TouchableOpacity>
       </View>
     </View>
