@@ -72,38 +72,112 @@
 
 // export default Gallery;
 
+import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import React, {useEffect, useState} from 'react';
-import {FlatList, Image, View, StyleSheet} from 'react-native';
-import {requestPermission} from '../components/Parmition';
-import {fetchImages} from '../components/FetchImage';
+import {
+  FlatList,
+  Image,
+  View,
+  Text,
+  StyleSheet,
+  TouchableOpacity,
+} from 'react-native';
+import ImageView from 'react-native-image-viewing';
+import {hasAndroidPermission} from '../components/Parmition';
+import Icon from 'react-native-vector-icons/MaterialIcons';
+import {useAppDispatch, useAppSelector} from '../Redux/hooks';
+import {
+  addFavorite,
+  removeFavorite,
+} from '../Redux/features/favorite/favoriteSlice';
 
 const Gallery = () => {
-  const [images, setImages] = useState([]);
+  const [isVisible, setIsVisible] = useState(false);
+  const [images, setImages] = useState([] as any);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
+
+  const dispatch = useAppDispatch();
+  const favorite = useAppSelector(state => state.favorite as string[]);
+  console.log(favorite);
 
   useEffect(() => {
     const loadImages = async () => {
-      const permissionGranted = await requestPermission();
+      const permissionGranted = await hasAndroidPermission();
       if (permissionGranted) {
-        const galleryImages = await fetchImages();
-        setImages(galleryImages);
+        CameraRoll.getPhotos({
+          first: 20,
+          assetType: 'Photos',
+        })
+          .then(r => {
+            setImages(
+              r.edges.map(p => {
+                return p.node;
+              }),
+            );
+            console.log(
+              r.edges.map(p => {
+                return p.node.id;
+              }),
+            );
+          })
+          .catch(err => {
+            //Error Loading Images
+          });
       }
     };
     loadImages();
   }, []);
 
-  const renderItem = ({item}) => (
-    <View style={styles.imageContainer}>
-      <Image source={{uri: item.uri}} style={styles.image} />
-    </View>
-  );
+  const handleFavoriteToggle = (id: string, isFavorite: boolean) => {
+    if (isFavorite) {
+      dispatch(removeFavorite(id));
+    } else {
+      dispatch(addFavorite(id));
+    }
+  };
+  const renderItem = ({item, index}: any) => {
+    const isFavorite = favorite.some(image => image === item.id);
+
+    console.log(isFavorite);
+    return (
+      <TouchableOpacity
+        style={styles.imageContainer}
+        onPress={() => {
+          setSelectedImageIndex(index);
+          setIsVisible(true);
+        }}>
+        <Image source={{uri: item.image.uri}} style={styles.image} />
+        <TouchableOpacity
+          style={styles.favorite}
+          onPress={() => handleFavoriteToggle(item.id, isFavorite)}>
+          <Icon
+            style={styles.love}
+            name="favorite"
+            size={30}
+            color={isFavorite ? 'red' : 'gray'}
+          />
+        </TouchableOpacity>
+      </TouchableOpacity>
+    );
+  };
 
   return (
-    <FlatList
-      data={images}
-      renderItem={renderItem}
-      keyExtractor={(item, index) => index.toString()}
-      numColumns={3}
-    />
+    <>
+      <FlatList
+        data={images}
+        renderItem={renderItem}
+        keyExtractor={(item, index) => item.id}
+        numColumns={3}
+      />
+      <ImageView
+        images={images.map((img: {image: any; uri: string}) => ({
+          uri: img.image.uri,
+        }))}
+        imageIndex={selectedImageIndex}
+        visible={isVisible}
+        onRequestClose={() => setIsVisible(false)}
+      />
+    </>
   );
 };
 
@@ -113,8 +187,16 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   image: {
-    width: '100%',
-    height: 100,
+    width: 'auto',
+    height: 130,
+  },
+  favorite: {
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+  },
+  love: {
+    padding: 5,
   },
 });
 

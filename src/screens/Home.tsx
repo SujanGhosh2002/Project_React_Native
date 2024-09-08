@@ -13,6 +13,7 @@ const Home = () => {
       {sidebar ? <Sidebar /> : null}
       <View>
         <Header />
+        <Text>Sujan</Text>
       </View>
     </View>
   );

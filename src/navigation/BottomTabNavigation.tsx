@@ -4,15 +4,15 @@ import Footer from '../components/Footer';
 import {NavigationContainer} from '@react-navigation/native';
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import Home from './Home';
-import Gallery from './Gallery';
-import Notifications from './Notifications';
-import Video from './Video';
-import MY_Network from './MY_Network';
-import Puja from './Puja';
+import Home from '../screens/Home';
+import Gallery from '../screens/Gallery';
+import Notifications from '../screens/Notifications';
+import Video from '../screens/Video';
+import MY_Network from '../screens/MY_Network';
+import Puja from '../screens/Puja';
 
 const Tab = createBottomTabNavigator();
-const Main = () => {
+const BottomTabNavigation = () => {
   return (
     <NavigationContainer independent={true}>
       <Tab.Navigator
@@ -112,6 +112,6 @@ const Main = () => {
   );
 };
 
-export default Main;
+export default BottomTabNavigation;
 
 const styles = StyleSheet.create({});
