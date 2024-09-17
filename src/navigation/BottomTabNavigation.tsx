@@ -20,7 +20,7 @@ const BottomTabNavigation = () => {
           tabBarActiveTintColor: '#87CEEA',
           tabBarInactiveTintColor: 'gray',
           tabBarLabelStyle: {
-            fontSize: 15,
+            fontSize: 10,
           },
         }}>
         <Tab.Screen
@@ -65,7 +65,7 @@ const BottomTabNavigation = () => {
             headerShown: false,
           }}
         />
-        <Tab.Screen
+        {/* <Tab.Screen
           name="Gallery"
           component={Gallery}
           options={{
@@ -78,7 +78,7 @@ const BottomTabNavigation = () => {
             ),
             headerShown: false,
           }}
-        />
+        /> */}
         <Tab.Screen
           name="Notifications"
           component={Notifications}

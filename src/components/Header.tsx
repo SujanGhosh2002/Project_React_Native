@@ -10,32 +10,38 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import {useNavigation} from '@react-navigation/native';
 import {useAppDispatch} from '../Redux/hooks';
 import {showSidebar} from '../Redux/features/sidebar/sidebarSlice';
+import {showMessages} from '../Redux/features/messages/messagesSlice';
+import {showPosts} from '../Redux/features/posts/postsSlice';
+import Sidebar from '../components/Sidebar';
+import Messages from '../components/Messages';
+import Posts from '../components/Posts';
+import Search from './Search';
 
 const Header = () => {
   const dispatch = useAppDispatch();
   const navigation = useNavigation();
   return (
     <View style={styles.container}>
+      <Sidebar />
+      <Messages />
+      <Posts />
       <TouchableOpacity
         style={styles.icon}
         onPress={() => dispatch(showSidebar())}>
         <Icon name="account-circle" size={28} color="#0073b1" />
       </TouchableOpacity>
 
-      <View style={styles.searchBar}>
-        <Icon name="search" size={20} color="#0073b1" />
-        <TextInput
-          placeholder="Search"
-          placeholderTextColor="#0073b1"
-          style={styles.searchInput}
-        />
-      </View>
+      <Search />
 
       <View style={styles.iconContainer}>
-        <TouchableOpacity style={styles.icon}>
-          <Icon name="my-library-add" size={28} color="#0073b1" />
+        <TouchableOpacity
+          onPress={() => dispatch(showPosts())}
+          style={styles.icon}>
+          <Icon name="add" size={28} color="#0073b1" />
         </TouchableOpacity>
-        <TouchableOpacity style={styles.icon}>
+        <TouchableOpacity
+          onPress={() => dispatch(showMessages())}
+          style={styles.icon}>
           <Icon name="chat" size={28} color="#0073b1" />
         </TouchableOpacity>
       </View>
@@ -50,20 +56,6 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10,
     borderBottomWidth: 1,
     borderBottomColor: '#ddd',
-  },
-  searchBar: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    borderRadius: 5,
-    paddingHorizontal: 10,
-    flex: 1,
-    marginLeft: 10,
-  },
-  searchInput: {
-    marginLeft: 5,
-    flex: 1,
-    fontSize: 16,
   },
   iconContainer: {
     flexDirection: 'row',

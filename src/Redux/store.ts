@@ -4,6 +4,8 @@ import counterSlice from './features/counter/countSlice';
 import togglePasswordSlice from './features/toggle/togglePasswordSlice';
 import showSidebarSlice from './features/sidebar/sidebarSlice';
 import favoriteSlice from './features/favorite/favoriteSlice';
+import messagesSlice from './features/messages/messagesSlice';
+import postsSlice from './features/posts/postsSlice';
 
 export const store = configureStore({
   reducer: {
@@ -11,7 +13,9 @@ export const store = configureStore({
     count: counterSlice,
     password: togglePasswordSlice,
     sidebar: showSidebarSlice,
-    favorite: favoriteSlice
+    favorite: favoriteSlice,
+    messages: messagesSlice,
+    posts: postsSlice
   },
 });
 

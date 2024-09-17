@@ -12,24 +12,24 @@ const Stack = createNativeStackNavigator();
 const StackNavigation = () => {
   return (
     <NavigationContainer>
-      {/* <Stack.Navigator> */}
-      {/* <Stack.Screen
+      <Stack.Navigator>
+        <Stack.Screen
           name="Sign_Up"
           component={Sign_Up}
           options={{headerShown: false}}
-        /> */}
-      {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="Sign_In"
           component={Sign_In}
           options={{headerShown: false}}
-        /> */}
-      {/* <Stack.Screen
+        />
+        <Stack.Screen
           name="BottomTabNavigation"
           component={BottomTabNavigation}
           options={{headerShown: false}}
-        /> */}
-      {/* </Stack.Navigator> */}
-      <A />
+        />
+      </Stack.Navigator>
+      {/* <A /> */}
       {/* <DrawerNavigation /> */}
     </NavigationContainer>
   );
