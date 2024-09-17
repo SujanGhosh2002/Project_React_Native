@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import React, {useState} from 'react';
 // import {
 //   View,
@@ -72,6 +73,8 @@
 
 // export default Gallery;
 
+=======
+>>>>>>> 3d26925bf784a0775e0de4df1bbd8ba75036963a
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 import React, {useEffect, useState} from 'react';
 import {
@@ -90,6 +93,10 @@ import {
   addFavorite,
   removeFavorite,
 } from '../Redux/features/favorite/favoriteSlice';
+<<<<<<< HEAD
+=======
+import Header from '../components/Header';
+>>>>>>> 3d26925bf784a0775e0de4df1bbd8ba75036963a
 
 const Gallery = () => {
   const [isVisible, setIsVisible] = useState(false);
@@ -98,7 +105,10 @@ const Gallery = () => {
 
   const dispatch = useAppDispatch();
   const favorite = useAppSelector(state => state.favorite as string[]);
+<<<<<<< HEAD
   console.log(favorite);
+=======
+>>>>>>> 3d26925bf784a0775e0de4df1bbd8ba75036963a
 
   useEffect(() => {
     const loadImages = async () => {
@@ -114,11 +124,14 @@ const Gallery = () => {
                 return p.node;
               }),
             );
+<<<<<<< HEAD
             console.log(
               r.edges.map(p => {
                 return p.node.id;
               }),
             );
+=======
+>>>>>>> 3d26925bf784a0775e0de4df1bbd8ba75036963a
           })
           .catch(err => {
             //Error Loading Images
@@ -137,8 +150,11 @@ const Gallery = () => {
   };
   const renderItem = ({item, index}: any) => {
     const isFavorite = favorite.some(image => image === item.id);
+<<<<<<< HEAD
 
     console.log(isFavorite);
+=======
+>>>>>>> 3d26925bf784a0775e0de4df1bbd8ba75036963a
     return (
       <TouchableOpacity
         style={styles.imageContainer}
@@ -163,6 +179,10 @@ const Gallery = () => {
 
   return (
     <>
+<<<<<<< HEAD
+=======
+      <Header />
+>>>>>>> 3d26925bf784a0775e0de4df1bbd8ba75036963a
       <FlatList
         data={images}
         renderItem={renderItem}

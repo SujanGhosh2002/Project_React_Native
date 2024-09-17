@@ -1,4 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
+<<<<<<< HEAD
 import usersSlice from './features/users/usersSlice';
 import counterSlice from './features/counter/countSlice';
 import togglePasswordSlice from './features/toggle/togglePasswordSlice';
@@ -16,6 +17,13 @@ export const store = configureStore({
     favorite: favoriteSlice,
     messages: messagesSlice,
     posts: postsSlice
+=======
+import favoriteSlice from './features/favorite/favoriteSlice';
+
+export const store = configureStore({
+  reducer: {
+    favorite: favoriteSlice
+>>>>>>> 3d26925bf784a0775e0de4df1bbd8ba75036963a
   },
 });
 

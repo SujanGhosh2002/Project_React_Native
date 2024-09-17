@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 // import {PermissionsAndroid, Platform} from 'react-native';
 // import {PERMISSIONS, request} from 'react-native-permissions';
 
@@ -23,6 +24,11 @@
 import {PermissionsAndroid, Platform} from 'react-native';
 import {CameraRoll} from '@react-native-camera-roll/camera-roll';
 
+=======
+import {PermissionsAndroid, Platform} from 'react-native';
+import {CameraRoll} from '@react-native-camera-roll/camera-roll';
+
+>>>>>>> 3d26925bf784a0775e0de4df1bbd8ba75036963a
 export async function hasAndroidPermission() {
   const getCheckPermissionPromise = () => {
     if (Number(Platform.Version) >= 33) {
