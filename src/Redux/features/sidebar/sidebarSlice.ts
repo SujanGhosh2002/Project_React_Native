@@ -2,10 +2,10 @@ import { createSlice } from "@reduxjs/toolkit";
 
 export const sidebarSlice = createSlice({
     name: "sidebar",
-    initialState: false,
+    initialState: 0,
     reducers: {
-        showSidebar: (state) => true,
-        hideSidebar: (state) => false
+        showSidebar: (state) => 1,
+        hideSidebar: (state) => 0
     },
 });
 

@@ -1,7 +1,3 @@
 {
-    "java.compile.nullAnalysis.mode": "automatic",
-    "cSpell.words": [
-        "addfavorite",
-        "removefavorite"
-    ]
+    "java.compile.nullAnalysis.mode": "automatic"
 }
